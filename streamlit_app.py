@@ -35,8 +35,8 @@ my_data_rows = my_cur.fetchall()
 streamlit.header("The fruit list contains:")
 streamlit.dataframe(my_data_rows)
 
-add_my_fruit = streamlit.text_input('What fruit would you like to add?', 'jackfruit')
-my_cur.execute(f"INSERT INTO pc_rivery_db.public.fruit_load_list VALUES ({add_my_fruit})")
+add_my_fruit = streamlit.text_input('What fruit would you like to add?')
+my_cur.execute(f"INSERT INTO pc_rivery_db.public.fruit_load_list(FRUIT_NAME) VALUES ({add_my_fruit})")
 
 
 ## Google Forms ID - 1A1enbY2g41lY2h4NoWySNVyXwLR0WJxd0-2i_O3LYUQ
