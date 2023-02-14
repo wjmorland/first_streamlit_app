@@ -49,6 +49,7 @@ streamlit.header("The fruit list contains:")
 if streamlit.button('Get Fruit Load List'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
     my_data_rows = get_fruit_list()
+    my_cnx.close()
     streamlit.dataframe(my_data_rows)
 
 def insert_fruit(new_fruit):
@@ -56,10 +57,12 @@ def insert_fruit(new_fruit):
         my_cur.execute(f"INSERT INTO pc_rivery_db.public.fruit_load_list VALUES ('{new_fruit}')")
         return f"Thanks for adding {new_fruit}"
 
+streamlit.header("View Our Fruit List - Add Your Favorites!")
 add_my_fruit = streamlit.text_input('What fruit would you like to add?', 'jackfruit')
 if streamlit.button('Add a Fruit to the List'):
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
     message = insert_fruit(add_my_fruit)
+    my_cnx.close()
     streamlit.text(message)
 
 ## Google Forms ID - 1A1enbY2g41lY2h4NoWySNVyXwLR0WJxd0-2i_O3LYUQ
