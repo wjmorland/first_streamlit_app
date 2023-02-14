@@ -2,6 +2,7 @@ import streamlit
 import pandas
 import requests
 import snowflake.connector
+from urllib.error import URLError
 
 
 streamlit.title('My Parents New Healty Diner')
@@ -37,7 +38,7 @@ streamlit.dataframe(my_data_rows)
 
 add_my_fruit = streamlit.text_input('What fruit would you like to add?', 'jackfruit')
 streamlit.write('Thanks for adding ', add_my_fruit)
-# my_cur.execute(f"INSERT INTO pc_rivery_db.public.fruit_load_list(FRUIT_NAME) VALUES ({add_my_fruit})")
+# my_cur.execute(f"INSERT INTO pc_rivery_db.public.fruit_load_list VALUES ('from streamlit')")
 
 
 ## Google Forms ID - 1A1enbY2g41lY2h4NoWySNVyXwLR0WJxd0-2i_O3LYUQ
