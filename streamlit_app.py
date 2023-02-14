@@ -51,10 +51,16 @@ if streamlit.button('Get Fruit Load List'):
     my_data_rows = get_fruit_list()
     streamlit.dataframe(my_data_rows)
 
-add_my_fruit = streamlit.text_input('What fruit would you like to add?', 'jackfruit')
-streamlit.write('Thanks for adding ', add_my_fruit)
-# my_cur.execute(f"INSERT INTO pc_rivery_db.public.fruit_load_list VALUES ('from streamlit')")
+def insert_fruit(new_fruit):
+    with my_cnx.cursor() as my_cur:
+        my_cur.execute(f"INSERT INTO pc_rivery_db.public.fruit_load_list VALUES ('{new_fruit}')")
+        return f"Thanks for adding {new_fruit}"
 
+add_my_fruit = streamlit.text_input('What fruit would you like to add?', 'jackfruit')
+if streamlit.button('Add a Fruit to the List'):
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    message = insert_fruit(add_my_fruit)
+    streamlit.text(message)
 
 ## Google Forms ID - 1A1enbY2g41lY2h4NoWySNVyXwLR0WJxd0-2i_O3LYUQ
 ## FoodData Central API key - eLgugHDaVGeho9PHdfhOaDj6XyI5bZujsZAszSih
